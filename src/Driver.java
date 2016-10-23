@@ -21,7 +21,14 @@ public class Driver {
 		raiz.adicionar(60);
 		raiz.adicionar(100);
 		
-		System.out.println(raiz.toString());		
+		System.out.println("");
+		
+		System.out.println("Teste do toString():");
+		System.out.println(raiz.toString());
+		
+		System.out.println("");
+		
+		raiz.print();
 	}
 
 }
