@@ -287,10 +287,41 @@ public class No {
 		}
 	}
 	
-	public int posicao(int valor) {
+	// Retorna o número de posicoes ocupadas pelo ancestral e seus filhos esquerdos
+	private int posicaoDosAncestrais() {
+		
+		// Se tiver pai
+		if (pai != null) {
+			// Checa se este elemento eh o filho da direita
+			if (pai.dir == this) {
+				return pai.posicaoDosAncestrais() + pai.nosEsq + 1;
+			}
+			// Se nao for elemento da direita nao adiciona nada
+			else {
+				return pai.posicaoDosAncestrais();
+			}
+		}
+		
 		return 0;
 	}
-
+	
+	// Retorna a posicao do elemento inserido se a arvore fosse visitada em ordem simetrica
+	public int posicao(int elemento) {
+		
+		// Procura na sub-arvore direita
+		if (elemento > this.valor) {
+			return dir.posicao(elemento);
+		}
+		// Procura na sub-arvore esquerda
+		else if (elemento < this.valor) {
+			return esq.posicao(elemento);
+		}
+		// Achou o elemento
+		else {						
+			return nosEsq + 1 + posicaoDosAncestrais();
+		}
+	}
+	
 	//Retorna a mediana da arovre
 	public int mediana(){
 
@@ -309,17 +340,14 @@ public class No {
 		return mediana;
 	}
 	
-	// DONE
 	public Boolean ehCheia() {
 		return this.ehCheia;
 	}
 	
-	// DONE
 	public Boolean ehCompleta() {
 		return this.ehCompleta;
 	}
 	
-	// DONE
 	public String toString() {
 		// Fila utilizada no percorrimento em nível da arvore
 		Queue<No> fila = new LinkedList<No>();
