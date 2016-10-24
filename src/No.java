@@ -31,7 +31,7 @@ public class No {
 		ehCheia = true;
 		ehCompleta = true;
 		
-		System.out.println("NÛ criado com o valor " + valor + ".");
+		System.out.println("N√≥ criado com o valor " + valor + ".");
 	}
 	
 	// Metodos
@@ -130,7 +130,7 @@ public class No {
 		}
 	}
 	
-	// Checa se o no tem sub-arvores n„o completas
+	// Checa se o no tem sub-arvores n√£o completas
 	private Boolean temSubarvoreNaoCompleta() {
 		if (!temSubarvoreVazia()) {
 			if (esq.ehCompleta && dir.ehCompleta) {
@@ -190,7 +190,7 @@ public class No {
 				// Adiciona novo no
 				dir = new No(novoValor);
 				dir.pai = this;
-				System.out.println("NÛ " + novoValor + " adicionado a direita de " + valor + ".");
+				System.out.println("N√≥ " + novoValor + " adicionado a direita de " + valor + ".");
 								
 				// Atualiza ehCheia de todo o caminho de insercao
 				atualizaCheia();
@@ -224,7 +224,7 @@ public class No {
 				// Adiciona novo no
 				esq = new No(novoValor);
 				esq.pai = this;
-				System.out.println("NÛ " + novoValor + " adicionado a direita de " + valor + ".");
+				System.out.println("N√≥ " + novoValor + " adicionado a direita de " + valor + ".");
 				
 				// Atualiza ehCheia de todo o caminho de insercao
 				atualizaCheia();
@@ -298,7 +298,7 @@ public class No {
 	
 	// DONE
 	public String toString() {
-		// Fila utilizada no percorrimento em nÌvel da arvore
+		// Fila utilizada no percorrimento em n√≠vel da arvore
 		Queue<No> fila = new LinkedList<No>();
 		// String a ser retornada
 		String retorno = "";
@@ -333,9 +333,9 @@ public class No {
 		return retorno;
 	}
 
-	// Imprime todos os elementos da ·rvore em prÈ-ordem detalhando seus atributos
+	// Imprime todos os elementos da √°rvore em pr√©-ordem detalhando seus atributos
 	public void print () {
-		System.out.println("> NÛ: " + this.valor);
+		System.out.println("> N√≥: " + this.valor);
 		
 		if (this.pai != null) {
 			System.out.println("\tPai: " + this.pai.valor);
@@ -359,8 +359,8 @@ public class No {
 		
 		System.out.println("\tAltura: " + this.altura);
 		
-		System.out.println("\tNÛs a esquerda: " + this.nosEsq);
-		System.out.println("\tNÛs a direita: " + this.nosDir);
+		System.out.println("\tN√≥s a esquerda: " + this.nosEsq);
+		System.out.println("\tN√≥s a direita: " + this.nosDir);
 		System.out.println("\tehCheia: " + this.ehCheia);
 		System.out.println("\tehCompl: " + this.ehCompleta);
 		
