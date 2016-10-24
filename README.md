@@ -1,24 +1,24 @@
 # Extended-Binary-Search-Tree
 This is a project for the "Estruturas de Dados Básicas II" course from the Federal University of Rio Grande do Norte (UFRN).
 
-This Binary Search Tree has the following operations:
+<b>This Binary Search Tree has the following operations:</b>
 
 1. inserir()
     > Inserts new element in the tree.
     
-<b>2. remover()</b>
+2. remover()
     > Removes element from the tree.
     
 3. procurar()
     > Searches for element in the tree. Returns true if element is found.
     
-<b>4. enesimoElemento(int n)</b>
-    >Returns n-th element of the tree when traversed in-order.
+4. enesimoElemento(int n)
+    > Returns n-th element of the tree when traversed in-order.
 
-<b>5. posicao(Object object)</b>
+5. posicao(Object object)
     > Returns the position of the objects in the tree en traversed in-order.
     
-<b>6. mediana()</b>
+6. mediana()
     > Returns the element that would be in the middle position in an ordered array that contains all elements of the tree.
 
 7. ehCheia()
