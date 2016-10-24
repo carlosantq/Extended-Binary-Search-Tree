@@ -73,9 +73,101 @@ public class No {
 		}
 	}
 
-	// Atualiza ehCheia. Chamada apenas para nos com filhos.
+	// Atualiza ehCheia
 	private void atualizaCheia() {
-				
+		
+		System.out.println("\tAtualizando ehCheia do no " + this.valor);
+		
+		if (pai == null) {
+			// No possui dois filhos
+			if (dir != null && esq != null) {
+				if (dir.altura == esq.altura && esq.ehCheia && dir.ehCheia) {
+					ehCheia = true;
+				}
+				else {
+					ehCheia = false;
+				}
+			}
+			// No possui nenhum filho
+			else if (dir == null && esq == null) {
+				ehCheia = true;
+			}
+			// No possui apenas um filho
+			else {
+				ehCheia = false;
+			}
+		}
+		else {
+			// No possui dois filhos
+			if (dir != null && esq != null) {
+				if (dir.altura == esq.altura && esq.ehCheia && dir.ehCheia) {
+					ehCheia = true;
+				}
+				else {
+					ehCheia = false;
+				}
+			}
+			// No possui nenhum filho
+			else if (dir == null && esq == null) {
+				ehCheia = true;
+			}
+			// No possui apenas um filho
+			else {
+				ehCheia = false;
+			}
+			
+			pai.atualizaCheia();
+		}
+	}
+	
+	// Checa se o no tem sub-arvores vazias
+	private Boolean temSubarvoreVazia() {
+		if (esq == null || dir == null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	// Checa se o no tem sub-arvores não completas
+	private Boolean temSubarvoreNaoCompleta() {
+		if (!temSubarvoreVazia()) {
+			if (esq.ehCompleta && dir.ehCompleta) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}	
+	}
+	
+	// Atualiza eh ehCompleta
+	private void atualizaCompleta() {
+		
+		System.out.println("\tAtualizando ehCompleta do no " + this.valor);
+		
+		if (pai == null) {
+			if ((altura > 1 && temSubarvoreVazia()) || temSubarvoreNaoCompleta()) {
+				ehCompleta = false;
+			}
+			else {
+				ehCompleta = true;
+			}
+		}
+		else {
+			if (altura > 1 && temSubarvoreVazia()) {
+				ehCompleta = false;
+			}
+			else {
+				ehCompleta = true;
+			}
+			
+			pai.atualizaCompleta();
+		}
 	}
 	
 	// Adiciona novo elemento a arvore
@@ -87,7 +179,7 @@ public class No {
 				// Atualiza numero de nos a direita
 				nosDir++;
 				
-				//Atualiza altura
+				//Atualiza altura de todo o caminho de insercao
 				if (esq == null) {
 					altura++;
 					if (pai != null) {
@@ -95,17 +187,17 @@ public class No {
 					}
 				}
 				
-				
-				
-				
 				// Adiciona novo no
 				dir = new No(novoValor);
 				dir.pai = this;
-				
-				// TODO: Atualiza ehCheia
+				System.out.println("Nó " + novoValor + " adicionado a direita de " + valor + ".");
+								
+				// Atualiza ehCheia de todo o caminho de insercao
 				atualizaCheia();
 				
-				System.out.println("Nó " + novoValor + " adicionado a direita de " + valor + ".");
+				// Atualiza ehCOmpleta de todo o caminho de insercao
+				atualizaCompleta();
+				
 				return true;
 			}
 			// Nao achou lugar para adicionar o novo no e continua procurando
@@ -121,7 +213,7 @@ public class No {
 				// Atualiza numero de nos a esquerda
 				nosEsq++;
 				
-				//Atualiza altura
+				//Atualiza altura de todo o caminho de insercao
 				if (dir == null) {
 					altura++;
 					if (pai != null) {
@@ -129,17 +221,17 @@ public class No {
 					}
 				}
 				
-				
-				
 				// Adiciona novo no
 				esq = new No(novoValor);
 				esq.pai = this;
+				System.out.println("Nó " + novoValor + " adicionado a direita de " + valor + ".");
 				
-				// TODO: Atualiza ehCheia
+				// Atualiza ehCheia de todo o caminho de insercao
 				atualizaCheia();
 				
+				// Atualiza ehCOmpleta de todo o caminho de insercao
+				atualizaCompleta();
 				
-				System.out.println("Nó " + novoValor + " adicionado a esquerda de " + valor + ".");
 				return true;
 			}
 			// Nao achou lugar para adicionar o novo no e continua procurando
@@ -194,12 +286,14 @@ public class No {
 		return 0;
 	}
 	
+	// DONE
 	public Boolean ehCheia() {
 		return this.ehCheia;
 	}
 	
+	// DONE
 	public Boolean ehCompleta() {
-		return false;
+		return this.ehCompleta;
 	}
 	
 	// DONE
@@ -239,7 +333,7 @@ public class No {
 		return retorno;
 	}
 
-	
+	// Imprime todos os elementos da árvore em pré-ordem detalhando seus atributos
 	public void print () {
 		System.out.println("> Nó: " + this.valor);
 		
