@@ -275,15 +275,38 @@ public class No {
 	}
 	
 	public int enesimoElemento(int valor) {
-		return 0;
+
+		int posicao = this.nosEsq + 1;
+
+		if (valor > posicao){
+			return dir.enesimoElemento(valor-posicao);
+		}else if (valor < posicao){
+			return esq.enesimoElemento(valor);
+		}else{
+			return this.valor;
+		}
 	}
 	
 	public int posicao(int valor) {
 		return 0;
 	}
-	
-	public int mediana() {
-		return 0;
+
+	//Retorna a mediana da arovre
+	public int mediana(){
+
+		//Calcula o numero de elementos armazenados na arvore
+		int numElementos = this.nosEsq + this.nosDir + 1;
+		int mediana;
+
+		if (numElementos%2 != 0){
+			//Caso o numero de elementos seja um número impar
+			mediana = enesimoElemento((numElementos/2)+1);
+		}else{
+			//Caso o numero de elementos seja um número par
+			mediana = enesimoElemento(numElementos/2);
+		}
+
+		return mediana;
 	}
 	
 	// DONE

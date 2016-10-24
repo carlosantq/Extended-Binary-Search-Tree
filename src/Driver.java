@@ -61,7 +61,7 @@ public class Driver {
 
 				operacao = linha.substring(0, linha.indexOf(" "));
 
-				if (operacao == "ENESIMO" || operacao == "POSICAO" || operacao == "REMOVA"){
+				if (operacao.equals("ENESIMO") || operacao.equals("POSICAO") || operacao.equals("REMOVA")){
 					linha = linha.substring(linha.indexOf(" ")+1, linha.length());
 					parametro = Integer.parseInt(linha.substring(0, linha.length()));
 				}
@@ -96,6 +96,8 @@ public class Driver {
 		}catch (IOException ioe){
 			System.out.println("Erro na abertura do arquivo: " + ioe.getMessage());
 		}
+
+		arvore.print();
 
 	}
 }
