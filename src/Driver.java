@@ -7,10 +7,14 @@ public class Driver {
 		//Árvore
 		No arvore = null;
 		int numero;
+		String operacao;
+		int parametro = 0;
 
-		if (args.length < 1){
-			System.out.println("Erro! Arquivo de entrada não informado.");
+		if (args.length < 2){
+			System.out.println("Erro! Arquivos de entrada não informados.");
 		}
+
+		//ENTRADA
 
 		try{
 			//Abrindo o arquivo passado via argumento
@@ -43,7 +47,55 @@ public class Driver {
 			System.out.println("Erro na abertura do arquivo: " + ioe.getMessage());
 		}
 
-		//Imprimindo a árvore (depuração)
-		System.out.println(arvore.toString());
+
+		//INSTRUÇÕES
+
+		try{
+			FileReader fr = new FileReader(args[1]);
+			BufferedReader br = new BufferedReader(fr);
+
+			String linha = br.readLine();
+
+			while (linha != null){
+				System.out.println("Linha: " + linha);
+
+				operacao = linha.substring(0, linha.indexOf(" "));
+
+				if (operacao == "ENESIMO" || operacao == "POSICAO" || operacao == "REMOVA"){
+					linha = linha.substring(linha.indexOf(" ")+1, linha.length());
+					parametro = Integer.parseInt(linha.substring(0, linha.length()));
+				}
+
+				switch(operacao){
+					case "IMPRIMA":
+						System.out.println(arvore.toString());
+						break;
+					case "ENESIMO":
+						System.out.println(arvore.enesimoElemento(parametro));
+						break;
+					case "POSICAO":
+						System.out.println(arvore.posicao(parametro));
+						break;
+					case "REMOVA":
+						System.out.println(arvore.remover(parametro) ? "Removido o valor " + parametro : "O valor não pôde ser removido.");
+						break;
+					case "MEDIANA":
+						System.out.println(arvore.mediana());
+						break;
+					case "CHEIA":
+						System.out.println(arvore.ehCheia() ? "É Cheia" : "Não é cheia");
+						break;
+					case "COMPLETA":
+						System.out.println(arvore.ehCompleta() ? "É Completa" : "Não é completa");
+						break;	
+				}
+
+				linha = br.readLine();
+
+			}
+		}catch (IOException ioe){
+			System.out.println("Erro na abertura do arquivo: " + ioe.getMessage());
+		}
+
 	}
 }
