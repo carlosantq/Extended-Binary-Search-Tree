@@ -3,20 +3,29 @@ This is a project for the "Estruturas de Dados Básicas II" course from the Fede
 
 This Binary Search Tree has the following operations:
 
-1. Search
+1. inserir()
+    > Inserts new element in the tree.
+    
+<b>2. remover()</b>
+    > Removes element from the tree.
+    
+3. procurar()
+    > Searches for element in the tree. Returns true if element is found.
+    
+<b>4. enesimoElemento(int n)</b>
+    >Returns n-th element of the tree when traversed in-order.
 
-2. Insertion
+<b>5. posicao(Object object)</b>
+    > Returns the position of the objects in the tree en traversed in-order.
+    
+<b>6. mediana()</b>
+    > Returns the element that would be in the middle position in an ordered array that contains all elements of the tree.
 
-3. Removal
+7. ehCheia()
+    > Returns true if all leaf nodes are in the last or second to last levels of the tree.
 
-3. nth Element
+8. ehCompleta()
+    > Returns true if all leaf nodes are in the last level of the tree and all other nodes have two children.
 
-4. Position
-
-5. Median
-
-6. is Full?
-
-7. is Complete?
-
-8. toString
+9. toString()
+    > Return string containing all elements in level order traversal.
