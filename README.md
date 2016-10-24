@@ -9,7 +9,7 @@ This Binary Search Tree has the following operations:
 
 3. Removal
 
-3. ntn Element
+3. nth Element
 
 4. Position
 
