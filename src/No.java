@@ -33,7 +33,7 @@ public class No {
 		ehCheia = true;
 		ehCompleta = true;
 		
-		System.out.println("Nó criado com o valor " + valor + ".");
+		System.out.println("No criado com o valor " + valor);
 	}
 	
 	// Metodos
@@ -77,8 +77,6 @@ public class No {
 
 	// Atualiza ehCheia
 	private void atualizaCheia() {
-		
-		System.out.println("\tAtualizando ehCheia do no " + this.valor);
 		
 		if (pai == null) {
 			// No possui dois filhos
@@ -150,8 +148,6 @@ public class No {
 	// Atualiza eh ehCompleta
 	private void atualizaCompleta() {
 		
-		System.out.println("\tAtualizando ehCompleta do no " + this.valor);
-		
 		if (pai == null) {
 			if ((altura > 1 && temSubarvoreVazia()) || temSubarvoreNaoCompleta()) {
 				ehCompleta = false;
@@ -192,8 +188,7 @@ public class No {
 				// Adiciona novo no
 				dir = new No(novoValor);
 				dir.pai = this;
-				System.out.println("Nó " + novoValor + " adicionado a direita de " + valor + ".");
-								
+			
 				// Atualiza ehCheia de todo o caminho de insercao
 				atualizaCheia();
 				
@@ -226,8 +221,7 @@ public class No {
 				// Adiciona novo no
 				esq = new No(novoValor);
 				esq.pai = this;
-				System.out.println("Nó " + novoValor + " adicionado a direita de " + valor + ".");
-				
+
 				// Atualiza ehCheia de todo o caminho de insercao
 				atualizaCheia();
 				
@@ -255,7 +249,7 @@ public class No {
 		return false;		
 	}
 	
-	// Procura elementod na arvore
+	// Procura elemento "valor" na arvore
 	public Boolean procurar(int valor) {
 		// Nao achou
 		if (valor != this.valor && esq == null && dir == null) {
@@ -276,20 +270,27 @@ public class No {
 		return false;
 	}
 	
+	// Retorna o elemento na posicao "valor" se a arvore fosse visitada em ordem simetrica 
 	public int enesimoElemento(int valor) {
-
+		
+		// A posicao do elemento � igual o numero de elementos a sua esquerda + 1
 		int posicao = this.nosEsq + 1;
-
-		if (valor > posicao){
-			return dir.enesimoElemento(valor-posicao);
-		}else if (valor < posicao){
+		
+		// Procura na sub-arvore direita
+		if (valor > posicao) {
+			return dir.enesimoElemento(valor - posicao);
+		}
+		// Procura na sub-arvore esquerda
+		else if (valor < posicao) {
 			return esq.enesimoElemento(valor);
-		}else{
+		}
+		// Achou elemento
+		else {
 			return this.valor;
 		}
 	}
 	
-	// Retorna o número de posicoes ocupadas pelo ancestral e seus filhos esquerdos
+	// Retorna o numero de posicoes ocupadas pelo ancestral e seus filhos esquerdos
 	private int posicaoDosAncestrais() {
 		
 		// Se tiver pai
@@ -307,7 +308,7 @@ public class No {
 		return 0;
 	}
 	
-	// Retorna a posicao do elemento inserido se a arvore fosse visitada em ordem simetrica
+	// Retorna a posicao do elemento "elemento" se a arvore fosse visitada em ordem simetrica
 	public int posicao(int elemento) {
 		
 		// Procura na sub-arvore direita
@@ -331,25 +332,28 @@ public class No {
 		int numElementos = this.nosEsq + this.nosDir + 1;
 		int mediana;
 
-		if (numElementos%2 != 0){
-			//Caso o numero de elementos seja um número impar
-			mediana = enesimoElemento((numElementos/2)+1);
+		if (numElementos % 2 != 0) {
+			//Caso o numero de elementos seja um numero impar
+			mediana = enesimoElemento((numElementos / 2) + 1);
 		}else{
-			//Caso o numero de elementos seja um número par
-			mediana = enesimoElemento(numElementos/2);
+			//Caso o numero de elementos seja um numero par
+			mediana = enesimoElemento(numElementos / 2);
 		}
 
 		return mediana;
 	}
 	
+	// Retorna true se a arvore for cheia
 	public Boolean ehCheia() {
 		return this.ehCheia;
 	}
 	
+	// Retorna true se a arvore for completa
 	public Boolean ehCompleta() {
 		return this.ehCompleta;
 	}
 	
+	// Retorna a string que representa a arvore numa leitura por nivel
 	public String toString() {
 		// Fila utilizada no percorrimento em nível da arvore
 		Queue<No> fila = new LinkedList<No>();
@@ -386,9 +390,9 @@ public class No {
 		return retorno;
 	}
 
-	// Imprime todos os elementos da árvore em pré-ordem detalhando seus atributos
+	// Imprime todos os elementos da arvore em pre-ordem detalhando seus atributos
 	public void print () {
-		System.out.println("> Nó: " + this.valor);
+		System.out.println("> No: " + this.valor);
 		
 		if (this.pai != null) {
 			System.out.println("\tPai: " + this.pai.valor);
@@ -412,8 +416,8 @@ public class No {
 		
 		System.out.println("\tAltura: " + this.altura);
 		
-		System.out.println("\tNós a esquerda: " + this.nosEsq);
-		System.out.println("\tNós a direita: " + this.nosDir);
+		System.out.println("\tNos a esquerda: " + this.nosEsq);
+		System.out.println("\tNos a direita: " + this.nosDir);
 		System.out.println("\tehCheia: " + this.ehCheia);
 		System.out.println("\tehCompl: " + this.ehCompleta);
 		

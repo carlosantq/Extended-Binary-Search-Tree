@@ -10,13 +10,13 @@ import java.io.*;
 		
 		public static void main(String[] args) {
 			
-			//árvore
+			//Ã¡rvore
 			No arvore = null;
 			int numero = 0;
 			String operacao = null;
 			int parametro = 0;
-			//ENTRADA
-
+			
+			//ENTRADA DE ELEMENTOS
 			try{
 				chooser.setMultiSelectionEnabled(true);
 				
@@ -25,7 +25,6 @@ import java.io.*;
 				}catch (NullPointerException e){
 					System.out.println(e.getStackTrace());
 				}
-				
 				
 				//Abrindo o arquivo passado via argumento
 				FileReader fr = null;
@@ -39,7 +38,7 @@ import java.io.*;
 				
 				String linha = null;
 
-				//Considerando que apenas uma linha do arquivo será levada em conta
+				//Considerando que apenas uma linha do arquivo serÃ¡ levada em conta
 				try{
 					 linha = br.readLine();
 					 System.out.println("Linha: " + linha);
@@ -51,7 +50,7 @@ import java.io.*;
 				// while (linha != null){
 					
 
-					//Primeiro número da a raíz da Árvore
+					//Primeiro nÃºmero da a raÃ­z da Ã�rvore
 					try{
 						numero = Integer.parseInt(linha.substring(0, linha.indexOf(" ")));
 					}catch (StringIndexOutOfBoundsException e){
@@ -62,7 +61,7 @@ import java.io.*;
 
 					linha = linha.substring(linha.indexOf(" ")+1, linha.length());
 
-					//Adicionando números do arquivo restantes na árvore criada anteriormente
+					//Adicionando nÃºmeros do arquivo restantes na Ã¡rvore criada anteriormente
 					while (linha.length() > 0){
 						numero = Integer.parseInt(linha.substring(0, linha.indexOf(" ")));
 						arvore.adicionar(numero);
@@ -81,8 +80,7 @@ import java.io.*;
 			}
 
 
-			//INSTRUÃ‡Ã•ES
-
+			//ENTRADA DE COMANDOS
 			try{
 				chooser.showOpenDialog(parent);
 				FileReader fr;
@@ -91,19 +89,19 @@ import java.io.*;
 					fr = new FileReader(chooser.getSelectedFile());
 					br = new BufferedReader(fr);
 				}catch (NullPointerException e){
-					System.out.println("Erro! Não foi possível selecionar o arquivo.");
+					System.out.println("Erro! Nao foi possivel selecionar o arquivo.");
 				}
 				
 				String linha = null;
 				try{
 					linha  = br.readLine();
 				}catch (NullPointerException e){
-					System.out.println("Erro! Não foi possível ler a linha atual.");
+					System.out.println("Erro! Nao foi possivel ler a linha atual.");
 				}
 
 				while (linha != null){
-					//depuração
-					System.out.println("Linha: " + linha);
+					//depuracao
+					System.out.println("\n> " + linha);
 
 					try{
 						operacao = linha.substring(0, linha.indexOf(" "));
@@ -129,26 +127,26 @@ import java.io.*;
 							System.out.println(arvore.posicao(parametro));
 							break;
 						case "REMOVA":
-							System.out.println(arvore.remover(parametro) ? "Removido o valor " + parametro : "O valor não pode ser removido.");
+							System.out.println(arvore.remover(parametro) ? "Removido o valor " + parametro : "O valor nao pode ser removido.");
 							break;
 						case "MEDIANA":
 							System.out.println(arvore.mediana());
 							break;
 						case "CHEIA":
-							System.out.println(arvore.ehCheia() ? "É Cheia" : "Não é cheia");
+							System.out.println(arvore.ehCheia() ? "Eh Cheia" : "Nao eh cheia");
 							break;
 						case "COMPLETA":
-							System.out.println(arvore.ehCompleta() ? "É Completa" : "Não é completa");
+							System.out.println(arvore.ehCompleta() ? "Eh Completa" : "Nao eh completa");
 							break;	
 					}
 
 					}catch (NullPointerException e){
-						System.out.println("Erro! Não foi possível executar esta operação.");
+						System.out.println("Erro! Nao foi possivel executar esta operacao.");
 					}
 					try{
 						linha = br.readLine();
 					}catch(NullPointerException e){
-					 	System.out.println("Erro! Não foi possível ler a linha atual.");
+					 	System.out.println("Erro! Nao foi possivel ler a linha atual.");
 					 	break;
 					}
 
@@ -156,7 +154,5 @@ import java.io.*;
 			}catch (IOException ioe){
 				System.out.println("Erro na abertura do arquivo: " + ioe.getMessage());
 			}
-
 		}
-
 	}
