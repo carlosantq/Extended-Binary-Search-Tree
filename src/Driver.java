@@ -154,5 +154,7 @@ import java.io.*;
 			}catch (IOException ioe){
 				System.out.println("Erro na abertura do arquivo: " + ioe.getMessage());
 			}
+
+			arvore.print();
 		}
 	}

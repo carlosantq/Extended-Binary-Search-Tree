@@ -331,7 +331,7 @@ public class No {
 		else {						
 			// Remocao de no folha
 			if (esq == null && dir == null) {
-				// O no é filho esquerdo do seu pai
+				// O no eh filho esquerdo do seu pai
 				if (pai.esq == this) {
 					pai.esq = null;
 					
@@ -339,7 +339,7 @@ public class No {
 					pai.atualizaCheia();
 					pai.atualizaCompleta();
 				}
-				// O no é filho direito do seu pai
+				// O no eh filho direito do seu pai
 				else if (pai.dir == this) {
 					pai.dir = null;
 					
@@ -352,7 +352,7 @@ public class No {
 			}
 			// Remocao de no com 1 filho a esquerda
 			else if (esq != null && dir == null) {
-				// O no é filho esquerdo do seu pai
+				// O no eh filho esquerdo do seu pai
 				if (pai.esq == this) {
 					// Troca o filho a esquerda do pai desse no pelo filho a esquerda desse no
 					pai.esq = this.esq;
@@ -363,7 +363,7 @@ public class No {
 					pai.atualizaCheia();
 					pai.atualizaCompleta();
 				}
-				// O no é filho direito do seu pai
+				// O no eh filho direito do seu pai
 				else if (pai.dir == this) {
 					// Troca o filho a direita do pai desse no pelo filho a esquerda desse no
 					pai.dir = this.esq;
@@ -379,7 +379,7 @@ public class No {
 			}
 			// Remocao de no com 1 filho a direita
 			else if (esq == null && dir != null) {
-				// O no é filho esquerdo do seu pai
+				// O no eh filho esquerdo do seu pai
 				if (pai.esq == this) {
 					// Troca o filho a esquerda do pai desse no pelo filho a direita desse no
 					pai.esq = this.dir;
@@ -390,7 +390,7 @@ public class No {
 					pai.atualizaCheia();
 					pai.atualizaCompleta();
 				}
-				// O no é filho direito do seu pai
+				// O no eh filho direito do seu pai
 				else if (pai.dir == this) {
 					// Troca o filho a direita do pai desse no pelo filho a direita desse no
 					pai.dir = this.dir;
@@ -451,7 +451,7 @@ public class No {
 	// Retorna o elemento na posicao "valor" se a arvore fosse visitada em ordem simetrica 
 	public int enesimoElemento(int valor) {
 		
-		// A posicao do elemento é igual o numero de elementos a sua esquerda + 1
+		// A posicao do elemento eh igual o numero de elementos a sua esquerda + 1
 		int posicao = this.nosEsq + 1;
 		
 		// Procura na sub-arvore direita
