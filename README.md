@@ -30,12 +30,15 @@ This is a project for the "Estruturas de Dados Básicas II" course from the Fede
 9. toString()
     > Return string containing all elements in level order traversal.
 
-<br>Running the program:<b>
+<br>Running the program:</b>
 
 1. Go to src folder and type... 
     > javac Driver.java No.java -d ../bin
+    
 2. Go to bin folder and type...
     > java Driver
+    
 3. Select the files, go to data folder and select entrada.txt or entrada2.txt and then select the instrucoes.txt.
+
 4. The program is now running.
 
