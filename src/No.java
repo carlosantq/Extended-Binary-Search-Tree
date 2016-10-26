@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class No {
 	// Atributos
-	private int valor;
+	public int valor;
 	
 	private No pai;
 	private No esq;
@@ -168,6 +168,20 @@ public class No {
 		}
 	}
 	
+	// Corrige nosEsq e nosDir de todo o caminho de insercao em caso de insercao falha
+	private void corrigeEsqDir() {
+		if (pai != null) {
+			if (this == pai.esq) {
+				pai.nosEsq--;
+				pai.corrigeEsqDir();
+			}
+			else if (this == pai.dir) {
+				pai.nosDir--;
+				pai.corrigeEsqDir();
+			}
+		}
+	}
+		
 	// Adiciona novo elemento a arvore
 	public Boolean adicionar(int novoValor) {
 		// Novo valor maior que raiz
@@ -236,17 +250,181 @@ public class No {
 				esq.adicionar(novoValor);
 			}
 		}
-		// Novo valor igual a raiz
+		// Novo valor igual a raiz (insercao de valor repetido)
 		else {
+			this.corrigeEsqDir();
+			
 			return false;
 		}
 		
 		return false;
 	}
 	
+	// Chamado dentro de remover() para corrigir alturas
+	private void atualizaAlturaRemover() {
+		if (pai == null) {
+			if (esq != null && dir != null) {
+				altura = max(esq.altura, dir.altura) + 1;
+			}
+			else if (esq == null && dir != null) {
+				altura = dir.altura + 1;
+			}
+			else if (dir == null && dir != null) {
+				altura = esq.altura + 1;
+			}
+			else if (esq == null && dir == null) {
+				altura = 0;
+			}
+		}
+		else {
+			if (esq != null && dir != null) {
+				altura = max(esq.altura, dir.altura) + 1;
+			}
+			else if (esq == null && dir != null) {
+				altura = dir.altura + 1;
+			}
+			else if (dir == null && dir != null) {
+				altura = esq.altura + 1;
+			}
+			else if (esq == null && dir == null) {
+				altura = 0;
+			}
+
+			pai.atualizaAlturaRemover();
+		}
+	}
+	
+	// Corrige nosEsq e nosDir de todo o caminho de remocao em caso e remocao falha
+	private void corrigeEsqDirRemover() {
+		if (pai != null) {
+			if (this == pai.esq) {
+				pai.nosEsq++;
+				pai.corrigeEsqDirRemover();
+			}
+			else if (this == pai.dir) {
+				pai.nosDir++;
+				pai.corrigeEsqDirRemover();
+			}
+		}
+	}
+	
 	// Remove elemento da arvore
 	public Boolean remover(int valor) {
-		return false;		
+		
+		// Chegou a uma folha e nao achou o elemento
+		if (this.esq == null && this.dir == null && valor != this.valor) {
+			this.corrigeEsqDirRemover();
+			
+			return false;
+		}
+		// Procura na sub-arvore direita
+		else if (valor > this.valor) {
+			nosDir--;
+			this.dir.remover(valor);
+		}
+		// Procura na sub-arvore esquerda
+		else if (valor < this.valor) {
+			nosEsq--;
+			this.esq.remover(valor);
+		}
+		// Achou o elemento
+		else {						
+			// Remocao de no folha
+			if (esq == null && dir == null) {
+				// O no é filho esquerdo do seu pai
+				if (pai.esq == this) {
+					pai.esq = null;
+					
+					pai.atualizaAlturaRemover();
+					pai.atualizaCheia();
+					pai.atualizaCompleta();
+				}
+				// O no é filho direito do seu pai
+				else if (pai.dir == this) {
+					pai.dir = null;
+					
+					pai.atualizaAlturaRemover();
+					pai.atualizaCheia();
+					pai.atualizaCompleta();
+				}
+				
+				return true;
+			}
+			// Remocao de no com 1 filho a esquerda
+			else if (esq != null && dir == null) {
+				// O no é filho esquerdo do seu pai
+				if (pai.esq == this) {
+					// Troca o filho a esquerda do pai desse no pelo filho a esquerda desse no
+					pai.esq = this.esq;
+					// Troca o pai do filho a esquerda desse no pelo pai desse no
+					this.esq.pai = pai;
+					
+					pai.atualizaAlturaRemover();
+					pai.atualizaCheia();
+					pai.atualizaCompleta();
+				}
+				// O no é filho direito do seu pai
+				else if (pai.dir == this) {
+					// Troca o filho a direita do pai desse no pelo filho a esquerda desse no
+					pai.dir = this.esq;
+					// Troca o pai do filho a esquerda desse no pelo pai desse no
+					this.esq.pai = pai;
+					
+					pai.atualizaAlturaRemover();
+					pai.atualizaCheia();
+					pai.atualizaCompleta();
+				}
+				
+				return true;
+			}
+			// Remocao de no com 1 filho a direita
+			else if (esq == null && dir != null) {
+				// O no é filho esquerdo do seu pai
+				if (pai.esq == this) {
+					// Troca o filho a esquerda do pai desse no pelo filho a direita desse no
+					pai.esq = this.dir;
+					// Troca o pai do filho a direita desse no pelo pai desse no
+					this.dir.pai = pai;
+
+					pai.atualizaAlturaRemover();
+					pai.atualizaCheia();
+					pai.atualizaCompleta();
+				}
+				// O no é filho direito do seu pai
+				else if (pai.dir == this) {
+					// Troca o filho a direita do pai desse no pelo filho a direita desse no
+					pai.dir = this.dir;
+					// Troca o pai do filho a direita desse no pelo pai desse no
+					this.dir.pai = pai;
+
+					pai.atualizaAlturaRemover();
+					pai.atualizaCheia();
+					pai.atualizaCompleta();
+				}
+				
+				return true;
+			}
+			
+			// Remocao de no com 2 filhos
+			else {
+				
+				// FALTA FAZER ===============================================			
+				
+				return false;
+			}
+		}
+		
+		return false;
+	}
+	
+	// Procura o menos elemento de uma arvore
+	public No menorElemento() {
+		if (this.esq != null) {
+			return this.esq.menorElemento();
+		}
+		else {
+			return this;
+		}
 	}
 	
 	// Procura elemento "valor" na arvore
