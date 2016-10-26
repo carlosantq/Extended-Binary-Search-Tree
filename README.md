@@ -32,10 +32,10 @@ This is a project for the "Estruturas de Dados Básicas II" course from the Fede
 
 <br>Running the program:<b>
 
-Go to src folder and type... 
+1. Go to src folder and type... 
     > javac Driver.java No.java -d ../bin
-Go to bin folder and type...
+2. Go to bin folder and type...
     > java Driver
-Select the files, go to data folder and select entrada.txt or entrada2.txt and then select the instrucoes.txt.
-The program is now running.
+3. Select the files, go to data folder and select entrada.txt or entrada2.txt and then select the instrucoes.txt.
+4. The program is now running.
 
