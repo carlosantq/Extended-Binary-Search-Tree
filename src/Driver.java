@@ -1,15 +1,10 @@
-package binaryTree;
 
 import javax.swing.*;
-
 import java.awt.Component;
 import java.io.*;
-	
-	
-	
+
 	public class Driver{
-		
-	
+
 		final static JFileChooser chooser = new JFileChooser();
 		static Component parent = null;
 		
@@ -42,7 +37,7 @@ import java.io.*;
 					System.out.println(e.getStackTrace());
 				}
 				
-				String linha = "";
+				String linha = null;
 
 				//Considerando que apenas uma linha do arquivo será levada em conta
 				try{
@@ -96,17 +91,18 @@ import java.io.*;
 					fr = new FileReader(chooser.getSelectedFile());
 					br = new BufferedReader(fr);
 				}catch (NullPointerException e){
-					System.out.println("error");
+					System.out.println("Erro! Não foi possível selecionar o arquivo.");
 				}
 				
-				String linha = "";
+				String linha = null;
 				try{
 					linha  = br.readLine();
 				}catch (NullPointerException e){
-					System.out.println("error");
+					System.out.println("Erro! Não foi possível ler a linha atual.");
 				}
 
 				while (linha != null){
+					//depuração
 					System.out.println("Linha: " + linha);
 
 					try{
@@ -115,7 +111,7 @@ import java.io.*;
 						System.out.println("erro");
 					}
 
-					if (operacao == "ENESIMO" || operacao == "POSICAO" || operacao == "REMOVA"){
+					if (operacao.equals("ENESIMO") || operacao.equals("POSICAO") || operacao.equals("REMOVA")){
 						linha = linha.substring(linha.indexOf(" ")+1, linha.length());
 						parametro = Integer.parseInt(linha.substring(0, linha.length()));
 					}
@@ -145,14 +141,15 @@ import java.io.*;
 							System.out.println(arvore.ehCompleta() ? "É Completa" : "Não é completa");
 							break;	
 					}
+
 					}catch (NullPointerException e){
-						System.out.println("erro");
+						System.out.println("Erro! Não foi possível executar esta operação.");
 					}
 					try{
 						linha = br.readLine();
 					}catch(NullPointerException e){
-						System.out.println("erro");
-						break;
+					 	System.out.println("Erro! Não foi possível ler a linha atual.");
+					 	break;
 					}
 
 				}
