@@ -407,22 +407,101 @@ public class No {
 			
 			// Remocao de no com 2 filhos
 			else {
-				
-				// FALTA FAZER ===============================================			
-				
-				return false;
+				if (pai == null){
+					No maior = this.esq.maiorElemento();
+					//System.out.println("O maior e: " + maior.valor);
+
+					maior.pai.dir = null;
+					maior.pai.atualizaAlturaRemover();
+					maior.pai.atualizaCheia();
+					maior.pai.atualizaCompleta();
+					maior.pai.nosDir-=1;
+
+					this.valor = maior.valor;
+
+					maior.pai = null;
+					maior.dir = this.dir;
+					maior.esq = this.esq;
+					maior.nosEsq = this.nosEsq;
+					maior.nosDir = this.nosDir-1;
+
+					maior.atualizaAlturaRemover();
+					maior.atualizaCheia();
+					maior.atualizaCompleta();
+				}
+
+				// O no a ser removido esta na direita, procura o maior elemento da subarvore da esquerda para substituir
+				else if (pai.dir == this){
+					No maior = this.esq.maiorElemento();
+					//System.out.println("O maior e: " + maior.valor);
+
+					maior.pai.dir = null;
+					maior.pai.atualizaAlturaRemover();
+					maior.pai.atualizaCheia();
+					maior.pai.atualizaCompleta();
+					maior.pai.nosDir-=1;
+
+					this.pai.dir = maior;
+					this.valor = maior.valor;
+
+					maior.pai = this.pai;
+					maior.dir = this.dir;
+					maior.esq = this.esq;
+					maior.nosEsq = this.nosEsq;
+					maior.nosDir = this.nosDir-1;
+
+					maior.atualizaAlturaRemover();
+					maior.atualizaCheia();
+					maior.atualizaCompleta();
+				}
+				// O no a ser removido esta na esquerda, procura o menor elemento da subarvore da direita para substituir
+				else if (pai.esq == this){
+
+					No menor = this.dir.menorElemento();
+					//System.out.println("O menor e: " + menor.valor);
+
+					menor.pai.esq = null;
+					menor.pai.atualizaAlturaRemover();
+					menor.pai.atualizaCheia();
+					menor.pai.atualizaCompleta();
+					menor.pai.nosEsq-=1;
+
+					this.pai.esq = menor;
+					this.valor = menor.valor;
+
+					menor.pai = this.pai;
+					menor.esq = this.esq;
+					menor.dir = this.dir;
+					menor.nosEsq = this.nosEsq-1;
+					menor.nosDir = this.nosDir;		
+					
+					menor.atualizaAlturaRemover();
+					menor.atualizaCheia();
+					menor.atualizaCompleta();
+				}
+
+				return true;
 			}
 		}
 		
-		return false;
+		return true;
 	}
 	
-	// Procura o menos elemento de uma arvore
+	// Procura o menor elemento de uma arvore
 	public No menorElemento() {
 		if (this.esq != null) {
 			return this.esq.menorElemento();
 		}
 		else {
+			return this;
+		}
+	}
+
+	//Procura o maior elemento de uma arvore
+	public No maiorElemento(){
+		if (this.dir != null){
+			return this.dir.maiorElemento();
+		}else{
 			return this;
 		}
 	}
